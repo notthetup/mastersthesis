@@ -1,0 +1,26 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Conclusion}
+\label{cha:conclusion}
+This chapter concludes the thesis, and also recommends some future work to improve the techniques described in this Thesis.
+
+The focus of this thesis project was to be able to model and synthesize traffic noise sources for use in simulation of sound environment in an urban setting. The ease and speed of use were to be the main consideration for the method being proposed for modeling the noise. The Spectral Modeling Synthesis technique described by Serra X. \cite{ref:sms} is adopted as a starting point for this project. The SMS technique is able to capture the essence of traffic noise, even though it was designed for a musical synthesis application. This proves the effectiveness of the SMS technique and also it's versatility. 
+
+The thesis proposes some additions and improvements to the SMS technique, which aim to increase the perceivable accuracy of the synthesized sound, specifically for traffic noise. These additions and improvements try to capture some of the important information that is discarded by the SMS technique, while discarding a lot of redundant information that is captured by the original SMS technique. A balance of these allows for the synthesis of perceptibly accurate sounds compared to the SMS technique. 
+
+The adjustments and improvements to the SMS technique expose many parameters as controls, especially in the analysis stage of the technique. The control and tuning of these parameters control the information being captured and discarded in the during the analysis stage. This turns out to be an extremely critical factor for an accurate re-synthesis and requires a lot of testing to make it work well. Manual tuning is required for many of the parameters in the current variant of the technique, which is a lengthy process.
+
+Considering the results of the listening test, while these proposed improvements to the SMS technique add appreciably to the accuracy of the SMS technique, they still lacks the accuracy to make it statistically significantly similar to the original sounds. However, the results also indicate that this depends on how well the analysis parameters were tuned for a specific source. A very well tuned parameter set can be made to sound very close to the original sound.
+
+Practically, these modeled sources can still be used in a simulator as per the original task since that use-case of simulation of sound environment in an urban setting does not require such strict significance for the 'realness' of the sound, especially the source model has to be combined with propagation effects to simulate the sound at the receivers position.
+
+Overall, using SMS technique for modeling traffic noise seems like promising idea. More work can be done with the control of the analysis parameters to allow the technique to work with even greater accuracy over a wide variety of vehicles. The ability to extract useful parameters while still being able to compress the size of the data required producing a sound is definitely a useful ability for traffic noise source models, for a urban environment simulator.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Future Work}
+Based on the work done for this thesis project, few suggestions can be made for future research work. 
+
+As mentioned in Section \ref{sec:results}, an automated system for determination and control of the analysis parameters can be explored. A pre-analysis based algorithm that can consider a small section (possibly the centre) of the sound to estimate the optimum parameters to extract the required information may be implemented. A possible use case was defined in Section \ref{sec:prop_trans_func}, for using these SMS models to conveniently apply propagation transfer functions without much computation and directly synthesized the sound already affected by the transfer function. This use case may be tested in a listening test.
+
+To further improve the noise characterization in the noise analysis section, advanced noise models can be considered. Serra X. has collated a list of the research done in this field which can be used as a reference \cite{ref:smsAdv}. Audio compression algorithms like MP3 use temporal and spectral filtering techniques to remove perceptually insignificant data. Incorporating some of these could be used to reduce the dependency on the peak detection and tracking algorithms in dealing with perceptual models.
+
+Finally, at a higher level, while the SMS technique is very useful at modeling the traffic noise, to generate a true noise source model, the analysis stage requires the propagation effects like doppler and amplitude reduction to be removed form the sound source. While this is possible, it's not very accurate. The granular synthesis technique is based on using very short duration of sounds as a 'seed' for generating much longer sounds. Such a small duration might not be affected by the propagation effects and thus can be used to generate a accurate general noise source model. Such a hybrid Grannular-Spectral Modeling system can be explored as a part of future work in this topic.

@@ -1,0 +1,11 @@
+
+Some Infos for the LaTeX Template of a Master Thesis at the Acoustics Department:
+=================================================================================
+
+The latex files should work with TeXnicCenter(Windows), other environments were not tested, but should work as well... 
+The main file is called "thesis.tex", the single chapters are saved in separate files. The compilation works for LaTeX=>DVI and LaTeX=>PDF, but the package hyperref works only for PDF files.
+The pictures should be ".eps" files for DVI output and ".pdf" files for PDF output. EPS can be converted into PDF with the help of the tool "epstopfd.exe" and maybe also other file formats might work (not tested!).
+
+If there are questions and you can not find an answer in LaTeX manuals, I can maybe help if you write an email to jooo@uni.de
+
+Joachim

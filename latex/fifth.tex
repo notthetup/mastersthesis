@@ -1,0 +1,83 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Discussion}
+\label{cha:discussion}
+This chapter looks at implementation of the Spectral Modeling Synthesis technique on traffic noise and the results of the listening test. The implementation is compared with the original goals of the project. Implications of the results are discussed as well as the key findings and lessons learned in the process of this project work.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{SMS Technique}
+At the most fundamental level, an important result of this thesis project is the ability of the SMS technique to be applied too much nosier sounds like traffic noise. While the SMS technique was developed for modeling musical instruments and sounds, its direct application with minimal changes to traffic noise is a significant result. While not specifically designed to model the noisy component of a given sound with complex algorithms, the SMS technique is able to capture and reproduce the essence of the noisy traffic sounds accurately using enveloped white noise.
+
+Furthermore, the concept of separation of tonal and noisy components, and the ability of including the propagation effects easily and without much computation into the synthesis model, lends itself well to traffic noise model, where the vehicle engines and tires generate significantly more tonal and noisy sounds respectively. This also opens up potential for using the parameters of the tonal and noisy components to synthesize various types of sounds.
+
+\section{Source}
+The source material used in the analysis stage is very critical in such a model. The source recording has to capture the essence of the vehicle sound, and not capture other ambient sounds. While some ambient sounds were removed during the pre-processing of the recording (see Section \ref{sec:src_data}), some other sounds (for e.g. birds chirping) were too well integrated into the recording to be able to be removed by post processing. Since the analysis parameters were not tuned to capture such sounds and they noticeably lacking in the re-synthesis.
+
+After the listening test, few participants pointed out that certain un-natural sounding artifact in the synthesized caused the re-synthesized sound to be detectable with high accuracy and repeatability. These could also be due to non-traffic noise being present in the source material.
+
+The type of vehicles analyzed is also something to be considered. Much of the source material used in this thesis work was based on the availability of good clean recordings. While that allowed the testing of this technique on various types of vehicles (small, medium and large), for a better model, trying out the model with a wider variety of vehicles would allow a more generic model to be developed.
+
+\section{Adjustments and Changes}
+The improvements done to the SMS Algorithm were intended to improve the perceptual accuracy of the model as well as reduce the time taken for the analysis process. While in some cases it was a trade off between the accuracy and speed, manual adjustments and tweaking allowed for a viable trade-off. The extra information captured by the multiple-pass analysis and the selective discarding of information in the peak-tracking algorithm helped to improve the perceptible accuracy of the models, while still being able to generate the synthesis in a realistic amount of time. 
+
+A point to be noted here is the software model developed for ease of analysis and the ability to easily plot, compare and manipulate data and parameters. Hence, in many occasions computational efficiency was not given a priority over development convenience leading to a generally longer amount of time taken to analyze and synthesize.
+
+While there was no listening test or numerical analysis done to compare the actual effect of all the additions and improvements to the original SMS technique, a large part of the perceptual accuracy of the synthesized sound was a result of the various additions and improvements. Furthermore, many of the adjustments and changes were specifically done to reduce certain effects or artifacts (see Section \ref{sec:guide_amp_interpolation}). 
+
+\subsection{Analysis Parameter}
+\label{sec:disc_parameters}
+It was noticed during the development of the technique that the accuracy of the system was extremely sensitive to analysis parameters. Small changes in analysis parameters would affect the sound significantly. While no data was collected on this, a large number of adjustments had to be done to improve the perceptual accuracy of the synthesis. This was a critical and affected the modeling significantly even when the adjustment itself was small.
+
+The sensitivity of Analysis parameters implied a significant importance on some technique to be able to control or tune these parameters, especially for the specific source sounds being used. Manual tuning, which was used widely throughout the thesis work can yield some good results. This was visible in the listening test results where specific sounds (Pair 4 - Volvo V70 at 70kmph, Pair 12 - King Long Bus at 22kmph, Pair 14 - King Long Bus at 39kmph), which were used in development, had very little significant difference between the original and the synthesized sound, which meant they were very similar. This could indicate that the analysis parameter were better tuned for those specific sounds and hence worked better with them.
+
+Manually tuning the analysis parameters for each individual of the 18 source files would have probably yielded better-synthesized sounds, but that would be very time consuming. Hence, a more automated system for doing such tuning would be useful in such a situation. None the less, this does indicate that a well-tuned system would be able to yield significantly similar sounds.
+
+\subsection{Energy Analysis}
+Energy Analysis turned out to be a very useful tool during this thesis work. The versatility of energy analysis and its ability to detect loss of information was invaluable in both development as well as debugging of the technique. Energy analysis ensured that the loudness of the individual components as well as of the combined sound remained similar after the analysis/re-synthesis. This too was critical, in the light of a matched pair test where a small difference in loudness would be easily detectable.
+
+\section{ Listening Tests}
+The listening tests done with the adjustments and improvements to the SMS Technique did not prove statistically significant lack of difference between the original and synthesized sounds across all of the sources used, when tested using a t-test. A number of the t-tests had to be rejected for the alternative hypothesis that the sounds were noticeably different
+
+With reference to Table \ref{tab:ttest_results} and especially Figure  \ref{fig:list_test_results}, some vague trends can be seen where the results were closer to the 50\% mark, which would then imply a lack of noticeable difference. The sounds of the King Long Bus tended to be closer to the 50\% mark on more occasions and also tended to be accepted more often than the other types of vehicles in the t-test as seen in Table \ref{tab:ttest_aggregate_vehicle}.
+
+One source file, Pair 12 - King Long Bus at 22kmph, shows exceptionally good performance and has all three of the t-tests accepted. As discussed in Section \ref{sec:disc_parameters}, this could be a result of a good tuning of the analysis parameters for that source file.
+
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{| c | c | c | c |}
+\hline
+Vehicle & Total T-Tests & Accepted T-Tests & Acceptance Ratio \\
+\hline
+Opel Astra & 3 & 1 & 0.33 \\
+Volvo V70 & 12 & 4 & 0.33\\
+Medium Heavy & 15 & 6 & 0.4\\
+King Long Bus & 24 & 13 & 0.55\\
+\hline
+\end{tabular}
+\caption{Tabulation for aggregated T-Test results for each vehicle type}
+\label{tab:ttest_aggregate_vehicle}
+\end{center}
+\end{table}
+
+Similarly, the question on Realism and Speed had many more accepted t-tests than the question on Annoyance on an aggregate scale as seen in Table \ref{tab:ttest_aggregate_test}. Hence the Annoyance seemed be a characteristic where the listeners had a more polarized opinion about the sounds. This can be an indication that the SMS technique is changing the sounds making them significantly more or less annoying (depending on the source) than than the original.
+
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{| c | c | c | c |}
+\hline
+Question & Total T-Tests & Accepted T-Tests & Acceptance Ratio \\
+\hline
+Realism & 18 & 9 & 0.50 \\
+Annoyance & 18 & 5 & 0.29\\
+Speed & 18 & 10 & 0.55\\
+\hline
+\end{tabular}
+\caption{Tabulation for aggregated T-Test results for each question type}
+\label{tab:ttest_aggregate_test}
+\end{center}
+\end{table}
+
+Furthermore, it can be argued that a t-test is a very strict measure of the modeling accuracy of the technique. While the aim of the model is to generate a perceptually similar sound, a matched pair test, specifically tests for equivalence of the sound. In many cases, including the target scenario of the urban environment simulator, it is sufficient for the synthesized sound to be similar to the original, and does not have to be exactly equal to the original. Furthermore, in the target scenario, the synthesized sounds would go through further processing based on propagation effects before being heard by the listener, possibly increasing the realism of the sounds. 
+
+A listening test which combines the source models generated using this technique with propagation effects would yield more accurate information about the validity of this technique in the simulator.
